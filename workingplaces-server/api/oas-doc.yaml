@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Workingplaces API
+  description: Generated with OAS TOOLS CLI 
+
+paths:
+  /api/v1/workingplaces:
+    get:
+      description: Returns all workingplaces
+      operationId: getWorkingplaces
+      responses:
+        200:
+          description: Workingplace list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/workingplace'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /api/v1/workingplaces/{province}:
+    get:
+      description: Returns a single workingplace by its province
+      operationId: findByprovince
+      parameters:
+        - required: true
+          name: province
+          description: province of the workingplace to fetch
+          in: path
+          schema:
+            type: string
+      responses:
+        200:
+          description: Workingplace found by province
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/workingplace'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+components:
+  schemas:
+    workingplace:
+        type: object
+        required:
+          - province
+        properties:
+          province:
+            type: string
+          year:
+            type: number
+          work_places:
+            type: number
+          percentage_structure:
+            type: number
+          variation_rating:
+            type: number
+    error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+      additionalProperties: true
