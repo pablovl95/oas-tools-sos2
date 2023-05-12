@@ -6,6 +6,7 @@ info:
 
 paths:
   /api/v1/workingplaces:
+    x-router-controller: apiv1workingplacesController
     get:
       description: Returns all workingplaces
       operationId: getWorkingplaces
@@ -25,6 +26,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
   /api/v1/workingplaces/{province}:
+    x-router-controller: apiv1workingplacesprovinceController
     get:
       description: Returns a single workingplace by its province
       operationId: findByprovince
